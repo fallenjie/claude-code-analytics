@@ -11,6 +11,15 @@
 ## 1. 产品概述
 
 ### 1.1 产品背景
+
+> ⚠️ **前提说明**：Claude Code 官方未公开完整的数据存储 API，本文档基于以下假设构建。在产品开发前，需通过逆向工程验证以下假设的正确性，并据此调整功能设计。
+>
+> **核心假设清单**：
+> 1. `~/.claude/conversations/[session-id]/metadata.json` 包含 cost、input_tokens、output_tokens 字段
+> 2. `~/.claude/conversations/[session-id]/conversation.jsonl` 记录完整的 tool_calls 生命周期
+> 3. Claude Code 数据结构在版本更新时可能发生变化，需做 schema 版本检测
+
+### 1.2 产品背景
 Claude Code 是 Anthropic 提供的命令行工具，帮助开发者使用 Claude 进行编程辅助。随着使用深入，用户面临以下痛点：
 - 不知道每次会话消耗了多少 Token，产生多少成本
 - 不清楚 Claude 接受了哪些工具调用，拒绝了什么
